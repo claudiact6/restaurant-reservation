@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+        crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <title>View Reservations | Hot Restaurant</title>
+</head>
+
+<body>
+    <div class="jumbotron bg-dark text-light text-center">
+        <h1 class="text-center">View Reservations</h1>
+        <a href="/reserve"><button type="button" class="btn btn-primary">Make reservation</button></a>
+        <a href="/"><button type="button" class="btn btn-primary">Home</button></a>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h2>Current reservations</h2>
+                <ol id="reserved"></ol>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <h2>Waiting list</h2>
+                <ol id="waiting"></ol>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <p><a href="">Tables API</a> | <a href="">Waitlist API</a> </p>
+    </footer>
+</body>
+
+</html>
+
+<script type="text/javascript">
+    $.get("/api/tables", function (data) {
+        console.log(data);
+        for (i = 0; i < data.length; i++) {
+            var li = $("<li>");
+            $(li).append(data[i].name + " - party of " + data[i].guests);
+            $("#reserved").append(li);
+        };
+    });
+
+    $.get("/api/waitlist", function (data) {
+        console.log(data);
+        for (i = 0; i < data.length; i++) {
+            var li = $("<li>");
+            $(li).append(data[i].name + " - party of " + data[i].guests);
+            $("#waiting").append(li);
+        };
+    });
+</script>
