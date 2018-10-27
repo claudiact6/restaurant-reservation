@@ -42,7 +42,7 @@
     $.get("/api/tables", function (data) {
         console.log(data);
         for (i = 0; i < data.length; i++) {
-            var li = $("<li>");
+            var li = $("<li class='tables' id='" + [i] + "'>");
             $(li).append(data[i].name + " - party of " + data[i].guests);
             $("#reserved").append(li);
         };
@@ -51,9 +51,22 @@
     $.get("/api/waitlist", function (data) {
         console.log(data);
         for (i = 0; i < data.length; i++) {
-            var li = $("<li>");
+            var li = $("<li class='waitlist' id='" + [i] + "'>");
             $(li).append(data[i].name + " - party of " + data[i].guests);
             $("#waiting").append(li);
         };
     });
+
+/*    $("<li>").on("click", function(event) {
+        event.preventDefault();
+        console.log("clicked");
+        var array = this.class;
+        var position = this.text();
+        $.delete("/api", array)
+        .then(function(data) {
+            console.log("deleting",data);
+        });
+        
+    });
+    */
 </script>

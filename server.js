@@ -44,16 +44,21 @@ app.get("/reserve", function(req, res) {
 //take in reservation info
 
 app.post("/api", function(req, res) {
-    console.log("Tables elngth",tables.length);
     var resData = req.body;
     if (tables.length < 5) {
         tables.push(resData);
-        res.json(resData);
+        res.json(true);
     } else {
         waitlist.push(resData);
-        res.json(resData);
+        res.json(false);
     };
 });
+
+//remove tables
+/* app.delete("/api", function(req, res) {
+    var data = req.body;
+    console.log(data);
+}); */
 
 //start server
 
